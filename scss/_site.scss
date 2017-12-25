@@ -1,0 +1,81 @@
+$extra-bold: 800;
+$light: 300;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,800');
+
+.black {
+    background: #000;
+    color: $white;
+}
+
+.light-grey {
+    background: $light-gray;
+    color: $black;
+}
+
+.dark-gray {
+    background: $dark-gray;
+    color: $white;
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: $black;
+    }
+}
+
+.extra-bold {
+  h1, h2, h3, h4, h5 {
+    font-weight: $extra-bold;
+  }
+}
+
+.name {
+    margin: 5em 0;
+}
+
+.logo {
+    margin: 8em 0;
+    img {
+        height: 10em;
+    }
+}
+
+.social {
+    margin: 3em 0;
+    color: $dark-gray;
+    .callout {
+        @extend .text-center;
+        background-color: inherit;
+        a {
+            color: inherit;
+            .icon {
+                font-size: 3em;
+            }
+        }
+        margin: 2em 0 1em 0;
+        border-color: $light-gray;
+        border-radius: 1em;
+    }
+    .callout:hover {
+        background-color: $dark-gray;
+        color: $white;
+    }
+}
+
+.motto {
+    padding-top: 4em;
+    h1 {
+        font-weight: $extra-bold;
+        text-align: center;
+    }
+}
+
+.presentation {
+    padding: 2em 0;
+    p {
+        font-size: 1.5em;
+        font-weight: $light;
+    }
+}
+
