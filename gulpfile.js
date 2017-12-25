@@ -1,6 +1,14 @@
 var gulp    = require('gulp');
 var webpack = require('webpack-stream');
+var bower   = require('gulp-bower');
 var $       = require('gulp-load-plugins')();
+
+var bowerDir = './bower_components';
+
+gulp.task('bower', function() {
+  return bower()
+        .pipe(gulp.dest(bowerDir))
+});
 
 gulp.task('html', function() {
   return gulp.src('index.html')
@@ -41,7 +49,7 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['html','img','sass','webpack'], function() {
+gulp.task('default', ['bower','html','img','sass','webpack'], function() {
   gulp.watch(['index.html'], ['html']);
   gulp.watch(['img/**/*'], ['img']);
   gulp.watch(['scss/**/*.scss'], ['sass']);
