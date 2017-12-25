@@ -1,5 +1,16 @@
-var gulp = require('gulp');
-var $    = require('gulp-load-plugins')();
+var gulp    = require('gulp');
+var webpack = require('webpack-stream');
+var $       = require('gulp-load-plugins')();
+
+gulp.task('html', function() {
+  return gulp.src('index.html')
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('img', function() {
+  return gulp.src('img/*')
+    .pipe(gulp.dest('dist/img'));
+});
 
 var sassPaths = [
   'bower_components/normalize.scss/sass',
@@ -17,9 +28,22 @@ gulp.task('sass', function() {
     .pipe($.autoprefixer({
       browsers: ['last 2 versions', 'ie >= 9']
     }))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['sass'], function() {
+gulp.task('webpack', function() {
+  return gulp.src('js/app.js')
+    .pipe(webpack({
+      output: {
+        filename: 'bundle.js',
+      }
+    }))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('default', ['html','img','sass','webpack'], function() {
+  gulp.watch(['index.html'], ['html']);
+  gulp.watch(['img/**/*'], ['img']);
   gulp.watch(['scss/**/*.scss'], ['sass']);
+  gulp.watch(['js/app.js'], ['webpack']);
 });
