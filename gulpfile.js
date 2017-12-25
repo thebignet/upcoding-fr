@@ -39,6 +39,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('jQuery', function() {
+  return gulp.src('bower_components/jquery/dist/jquery.min.js')
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('webpack', function() {
   return gulp.src('js/app.js')
     .pipe(webpack({
@@ -49,7 +54,7 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['bower','html','img','sass','webpack'], function() {
+gulp.task('default', ['bower','jQuery','html','img','sass','webpack'], function() {
   gulp.watch(['index.html'], ['html']);
   gulp.watch(['img/**/*'], ['img']);
   gulp.watch(['scss/**/*.scss'], ['sass']);
