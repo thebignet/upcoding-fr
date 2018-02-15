@@ -30,14 +30,21 @@ $light: 300;
   }
 }
 
-.name {
-    margin: 5em 0;
+@include breakpoint(medium uo) {
+    .personal {
+        margin: 5em 0;
+    }
+    .logo {
+        margin: 8em 0;
+        img {
+            height: 10em;
+        }
+    }
 }
 
-.logo {
-    margin: 8em 0;
-    img {
-        height: 10em;
+@include breakpoint(small only) {
+    .personal {
+        margin: 1em 0;
     }
 }
 
@@ -60,6 +67,15 @@ $light: 300;
     .callout:hover {
         background-color: $dark-gray;
         color: $white;
+    }
+    .name {
+        font-weight: $extra-bold;
+        @include breakpoint(small only) {
+            font-size: .8em;
+        }
+        @include breakpoint(medium up) {
+            font-size: 1.2em;
+        }
     }
 }
 
