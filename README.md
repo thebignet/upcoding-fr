@@ -22,5 +22,5 @@ npm run-script build
 ## Package
 
 ```bash
-tar czf upcoding.tar.gz --exclude .git --exclude node_modules .
+tar czf upcoding.tar.gz index.html css img
 ```
