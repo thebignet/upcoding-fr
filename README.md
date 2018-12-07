@@ -4,7 +4,7 @@
 
 To use this template, your computer needs:
 
-- [NodeJS](https://nodejs.org/en/) (0.12 or greater)
+- [NodeJS](https://nodejs.org/en/)
 - [Git](https://git-scm.com/)
 
 Install node modules:
@@ -15,12 +15,12 @@ npm install
 
 ## Build
 
-Build project :
-
 ```bash
-gulp
+npm run-script build
 ```
 
-This also installs bower components as a prerequisite.
+## Package
 
-In order to work on the project, use `gulp watch` to build automatically on save.
+```bash
+tar czf upcoding.tar.gz --exclude .git --exclude node_modules .
+```

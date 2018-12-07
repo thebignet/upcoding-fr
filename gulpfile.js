@@ -1,62 +1,36 @@
-var gulp    = require('gulp');
-var webpack = require('webpack-stream');
-var bower   = require('gulp-bower');
-var $       = require('gulp-load-plugins')();
-
-var bowerDir = './bower_components';
-
-gulp.task('bower', function() {
-  return bower()
-        .pipe(gulp.dest(bowerDir))
-});
-
-gulp.task('html', function() {
-  return gulp.src('index.html')
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('img', function() {
-  return gulp.src('img/*')
-    .pipe(gulp.dest('dist/img'));
-});
+var gulp          = require('gulp');
+var browserSync   = require('browser-sync').create();
+var $             = require('gulp-load-plugins')();
+var autoprefixer  = require('autoprefixer');
 
 var sassPaths = [
-  'bower_components/normalize.scss/sass',
-  'bower_components/foundation-sites/scss',
-  'bower_components/motion-ui/src'
+  'node_modules/foundation-sites/scss',
+  'node_modules/motion-ui/src'
 ];
 
-gulp.task('sass', function() {
+function sass() {
   return gulp.src('scss/app.scss')
     .pipe($.sass({
       includePaths: sassPaths,
       outputStyle: 'compressed' // if css compressed **file size**
     })
       .on('error', $.sass.logError))
-    .pipe($.autoprefixer({
-      browsers: ['last 2 versions', 'ie >= 9']
-    }))
-    .pipe(gulp.dest('dist'));
-});
+    .pipe($.postcss([
+      autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] })
+    ]))
+    .pipe(gulp.dest('css'))
+    .pipe(browserSync.stream());
+};
 
-gulp.task('jQuery', function() {
-  return gulp.src('bower_components/jquery/dist/jquery.min.js')
-    .pipe(gulp.dest('dist'));
-});
+function serve() {
+  browserSync.init({
+    server: "./"
+  });
 
-gulp.task('webpack', function() {
-  return gulp.src('js/app.js')
-    .pipe(webpack({
-      output: {
-        filename: 'bundle.js',
-      }
-    }))
-    .pipe(gulp.dest('dist'));
-});
+  gulp.watch("scss/*.scss", sass);
+  gulp.watch("*.html").on('change', browserSync.reload);
+}
 
-gulp.task('default', ['bower','jQuery','html','img','sass','webpack'], function() {
-  gulp.watch(['index.html'], ['html']);
-  gulp.watch(['img/**/*'], ['img']);
-  gulp.watch(['scss/**/*.scss'], ['sass']);
-  gulp.watch(['js/app.js'], ['webpack']);
-});
+gulp.task('sass', sass);
+gulp.task('serve', gulp.series('sass', serve));
+gulp.task('default', gulp.series('sass', serve));
