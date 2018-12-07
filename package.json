@@ -1,15 +1,15 @@
 {
-  "name": "foundation-sites-template",
+  "name": "upcoding-website",
   "version": "1.0.0",
-  "description": "Basic template for a new Foundation for Sites project.",
+  "description": "Upcoding website",
   "main": "gulpfile.js",
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-load-plugins": "^1.1.0",
-    "gulp-bower": "0.0.10",
-    "gulp-sass": "^2.1.0",
-    "webpack-stream": "^4.0.0"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-bower": "0.0.14",
+    "gulp-sass": "^4.0.2",
+    "webpack-stream": "^5.2.1"
   },
   "scripts": {
     "start": "gulp",
@@ -17,16 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zurb/foundation-sites-template.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zurb/foundation-sites/issues",
-    "email": "foundation@zurb.com"
+    "url": "https://github.com/thebignet/upcoding-fr"
   },
   "author": "Jean Detoeuf <jean@upcoding.fr>",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "gulp-autoprefixer": "^3.1.0"
+    "gulp-autoprefixer": "^6.0.0"
   }
 }

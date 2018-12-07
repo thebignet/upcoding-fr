@@ -51,6 +51,9 @@ $light: 300;
 .social {
     margin: 3em 0;
     color: $dark-gray;
+    h2 {
+        font-weight: $extra-bold;
+    }
     .callout {
         @extend .text-center;
         background-color: inherit;
