@@ -20,3 +20,9 @@ npm run package
 ```
 
 Archive `upcoding.zip` is ready to be deployed
+
+## Deploy
+
+```bash
+scp upcoding.zip pi@cozy.local:/tmp && ssh pi@cozy.local 'cd /var/www/presentation && rm -Rf * && unzip /tmp/upcoding.zip'
+```

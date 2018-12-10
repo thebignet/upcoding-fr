@@ -34,7 +34,7 @@ function index() {
 }
 
 gulp.task('package', () => 
-  gulp.src('dist/*')
+  gulp.src('dist/**')
     .pipe(zip('upcoding.zip'))
     .pipe(gulp.dest('.'))
 );
