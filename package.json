@@ -4,8 +4,9 @@
   "description": "Upcoding website",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp",
-    "build": "gulp sass"
+    "package": "gulp",
+    "build": "gulp sass images index",
+    "serve": "gulp serve"
   },
   "author": "Jean Detoeuf <jean@upcoding.fr>",
   "license": "MIT",
@@ -21,7 +22,8 @@
     "gulp": "^4.0.0",
     "gulp-load-plugins": "^1.1.0",
     "gulp-postcss": "^8.0.0",
-    "gulp-sass": "^4.0.1"
+    "gulp-sass": "^4.0.1",
+    "gulp-zip": "^4.2.0"
   },
   "repository": {
     "type": "git",

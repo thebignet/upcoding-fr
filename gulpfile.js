@@ -2,6 +2,7 @@ var gulp          = require('gulp');
 var browserSync   = require('browser-sync').create();
 var $             = require('gulp-load-plugins')();
 var autoprefixer  = require('autoprefixer');
+const zip         = require('gulp-zip');
 
 var sassPaths = [
   'node_modules/foundation-sites/scss',
@@ -18,19 +19,38 @@ function sass() {
     .pipe($.postcss([
       autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] })
     ]))
-    .pipe(gulp.dest('css'))
+    .pipe(gulp.dest('dist/css'))
     .pipe(browserSync.stream());
 };
 
+function images() {
+  return gulp.src('img/*')
+    .pipe(gulp.dest('dist/img/'));
+}
+
+function index() {
+  return gulp.src('index.html')
+    .pipe(gulp.dest('dist/'));
+}
+
+gulp.task('package', () => 
+  gulp.src('dist/*')
+    .pipe(zip('upcoding.zip'))
+    .pipe(gulp.dest('.'))
+);
+
 function serve() {
   browserSync.init({
-    server: "./"
+    server: "dist/"
   });
 
-  gulp.watch("scss/*.scss", sass);
-  gulp.watch("*.html").on('change', browserSync.reload);
+  gulp.watch("scss/*.scss", sass).on('change', browserSync.reload);
+  gulp.watch("*.html").on('change', index).on('change', browserSync.reload);
+  gulp.watch("img/*").on('change', images).on('change', browserSync.reload);
 }
 
 gulp.task('sass', sass);
-gulp.task('serve', gulp.series('sass', serve));
-gulp.task('default', gulp.series('sass', serve));
+gulp.task('images', images);
+gulp.task('index', index);
+gulp.task('serve', gulp.series('sass', 'images', 'index', serve));
+gulp.task('default', gulp.series('sass', 'images', 'index', 'package'));

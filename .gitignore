@@ -5,4 +5,5 @@ npm-debug.log
 css
 dist
 package-lock.json
-upcoding.tar.gz
+upcoding.zip
+yarn.lock

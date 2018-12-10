@@ -13,14 +13,10 @@ Install node modules:
 npm install
 ```
 
-## Build
-
-```bash
-npm run-script build
-```
-
 ## Package
 
 ```bash
-tar czf upcoding.tar.gz index.html css img
+npm run package
 ```
+
+Archive `upcoding.zip` is ready to be deployed
