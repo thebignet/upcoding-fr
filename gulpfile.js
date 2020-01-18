@@ -28,6 +28,11 @@ function images() {
     .pipe(gulp.dest('dist/img/'));
 }
 
+function javascript() {
+  return gulp.src('js/*')
+    .pipe(gulp.dest('dist/js/'));
+}
+
 function index() {
   return gulp.src('index.html')
     .pipe(gulp.dest('dist/'));
@@ -47,10 +52,12 @@ function serve() {
   gulp.watch("scss/*.scss", sass).on('change', browserSync.reload);
   gulp.watch("*.html").on('change', index).on('change', browserSync.reload);
   gulp.watch("img/*").on('change', images).on('change', browserSync.reload);
+  gulp.watch("js/*").on('change', javascript).on('change', browserSync.reload);
 }
 
 gulp.task('sass', sass);
 gulp.task('images', images);
 gulp.task('index', index);
-gulp.task('serve', gulp.series('sass', 'images', 'index', serve));
-gulp.task('default', gulp.series('sass', 'images', 'index', 'package'));
+gulp.task('javascript', javascript);
+gulp.task('serve', gulp.series('sass', 'images', 'index', 'javascript', serve));
+gulp.task('default', gulp.series('sass', 'images', 'index', 'javascript', 'package'));
