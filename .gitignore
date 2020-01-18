@@ -2,8 +2,6 @@
 bower_components
 node_modules
 npm-debug.log
-css
-dist
 package-lock.json
 upcoding.zip
 yarn.lock
